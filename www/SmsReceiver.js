@@ -1,6 +1,6 @@
 function SmsReceiver() { };
 
-FingerprintAuth.prototype.isSupported = function (successCallback, failureCallback) {
+SmsReceiver.prototype.isSupported = function (successCallback, failureCallback) {
     cordova.exec(
         successCallback, 
         failureCallback, 
@@ -10,7 +10,7 @@ FingerprintAuth.prototype.isSupported = function (successCallback, failureCallba
     );
 };
 
-FingerprintAuth.prototype.startReception = function (successCallback, failureCallback) {
+SmsReceiver.prototype.startReception = function (successCallback, failureCallback) {
     cordova.exec(
         successCallback, 
         failureCallback, 
@@ -20,7 +20,7 @@ FingerprintAuth.prototype.startReception = function (successCallback, failureCal
     );
 };
 
-FingerprintAuth.prototype.stopReception = function (successCallback, failureCallback) {
+SmsReceiver.prototype.stopReception = function (successCallback, failureCallback) {
     cordova.exec(
         successCallback, 
         failureCallback, 
@@ -30,7 +30,7 @@ FingerprintAuth.prototype.stopReception = function (successCallback, failureCall
     );
 };
 
-FingerprintAuth.prototype.requestPermission = function (successCallback, errorCallback) {
+SmsReceiver.prototype.requestPermission = function (successCallback, errorCallback) {
     cordova.exec(
         successCallback, 
         errorCallback, 
@@ -40,5 +40,4 @@ FingerprintAuth.prototype.requestPermission = function (successCallback, errorCa
     );
 };
 
-SmsReceiver = new SmsReceiver();
-module.exports = SmsReceiver;
+module.exports = new SmsReceiver();
