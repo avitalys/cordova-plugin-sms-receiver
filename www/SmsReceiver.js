@@ -1,17 +1,44 @@
-import exec from 'cordova/exec'
+function SmsReceiver() { };
 
-export function isSupported(successCallback, failureCallback) {
-  return exec(successCallback, failureCallback, 'SmsReceiverPlugin', 'hasSMSPossibility', [])
-}
+FingerprintAuth.prototype.isSupported = function (successCallback, failureCallback) {
+    cordova.exec(
+        successCallback, 
+        failureCallback, 
+        'SmsReceiverPlugin', 
+        'hasSMSPossibility', 
+        []
+    );
+};
 
-export function startReception(successCallback, failureCallback) {
-  return exec(successCallback, failureCallback, 'SmsReceiverPlugin', 'startReception', [])
-}
+FingerprintAuth.prototype.startReception = function (successCallback, failureCallback) {
+    cordova.exec(
+        successCallback, 
+        failureCallback, 
+        'SmsReceiverPlugin', 
+        'startReception', 
+        []
+    );
+};
 
-export function stopReception(successCallback, failureCallback) {
-  return exec(successCallback, failureCallback, 'SmsReceiverPlugin', 'stopReception', [])
-}
+FingerprintAuth.prototype.stopReception = function (successCallback, failureCallback) {
+    cordova.exec(
+        successCallback, 
+        failureCallback, 
+        'SmsReceiverPlugin', 
+        'stopReception', 
+        []
+    );
+};
 
-export function requestPermission(successCallback, errorCallback) {
-  return exec(successCallback, errorCallback, 'SmsReceiverPlugin', 'requestPermission', []);
-}
+FingerprintAuth.prototype.requestPermission = function (successCallback, errorCallback) {
+    cordova.exec(
+        successCallback, 
+        errorCallback, 
+        'SmsReceiverPlugin', 
+        'requestPermission', 
+        []
+    );
+};
+
+SmsReceiver = new SmsReceiver();
+module.exports = SmsReceiver;
