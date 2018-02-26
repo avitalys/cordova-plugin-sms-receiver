@@ -1,12 +1,9 @@
-package name.ratson.cordova.sms_receiver;
+package ratson.cordova.sms_receiver;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -109,16 +106,12 @@ public class SmsReceiverPlugin extends CordovaPlugin {
     }
 
     private boolean hasPermissionGranted(String type) {
-        if (Build.VERSION.SDK_INT < 23) {
-            return true;
-        }
-        return (PackageManager.PERMISSION_GRANTED ==
-                ContextCompat.checkSelfPermission(this.cordova.getActivity(), type));
+        return this.cordova.hasPermission(type);
     }
 
     private void requestPermission(String type, CallbackContext callbackContext) {
         if (!hasPermissionGranted(type)) {
-            ActivityCompat.requestPermissions(this.cordova.getActivity(), new String[]{type}, requestCode);
+            this.cordova.requestPermission(this, requestCode, type);
         }
         callbackContext.success();
     }

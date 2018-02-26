@@ -1,4 +1,4 @@
-package name.ratson.cordova.sms_receiver;
+package ratson.cordova.sms_receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
