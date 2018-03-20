@@ -23,21 +23,15 @@
                 <param name="android-package" value="name.ratson.cordova.sms_receiver.SmsReceiverPlugin" />
             </feature>
         </config-file>
-<!--
-        <config-file parent="/manifest/application" target="AndroidManifest.xml">
-            <receiver android:name="name.ratson.cordova.sms_receiver.SmsReceiver" android:exported="true">
-                <intent-filter android:priority="999">
-                    <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-                </intent-filter>
-            </receiver>
-        </config-file>
--->
 
         <config-file parent="/*" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.RECEIVE_SMS" />
         </config-file>
+      
+        <framework src="com.android.support:design:22.+" />
+        <framework src="com.android.support:appcompat-v7:22.+" />
 
-        <source-file src="src/android/SmsReceiver.java" target-dir="src/ratson/cordova/sms_receiver" />
-        <source-file src="src/android/SmsReceiverPlugin.java" target-dir="src/ratson/cordova/sms_receiver" />
+        <source-file src="src/android/SmsReceiver.java" target-dir="src/name/ratson/cordova/sms_receiver" />
+        <source-file src="src/android/SmsReceiverPlugin.java" target-dir="src/name/ratson/cordova/sms_receiver" />
     </platform>
 </plugin>
