@@ -1,3 +1,5 @@
+This plugin is based upon https://github.com/rehy/cordova-plugin-sms-receiver
+
 SMS Receiver plugin for Cordova
 ===============================
 
@@ -54,8 +56,7 @@ SmsReceiver.stopReception(() => {
 ```
 
 ### Aborting a broadcast ###
-If you abort the broadcast using this plugin (see ``broadcast`` boolean variable
-in the ``name.ratson.cordova.sms_receiver.SmsReceiver``), the SMS will not be broadcast to other
+If you abort the broadcast using this plugin, the SMS will not be broadcast to other
 applications like the native SMS app. So ... be careful !
 
 A good way to manage this is to stop the SMS reception when the onPause event is fired and, when the onResume event is fired, restart the reception.
