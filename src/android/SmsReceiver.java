@@ -22,49 +22,49 @@ public class SmsReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context ctx, Intent intent) {
 
-		if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
-			try {
-				// Get the SMS map from Intent
-				Bundle bundle = intent.getExtras();
+        if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
+            try {
+                // Get the SMS map from Intent
+                Bundle bundle = intent.getExtras();
 
-				if (bundle != null) {
-					//---retrieve the SMS message received---
-					Object[] pdus = (Object[]) bundle.get("pdus");
+                if (bundle != null) {
+                    //---retrieve the SMS message received---
+                    Object[] pdus = (Object[]) bundle.get("pdus");
 
-					if (pdus != null) {
-						String msgBody = "";
-						String msgFrom = "";
-						SmsMessage[] msgs = new SmsMessage[pdus.length];
+                    if (pdus != null) {
+                        String msgBody = "";
+                        String msgFrom = "";
+                        SmsMessage[] msgs = new SmsMessage[pdus.length];
 
-						for (int i = 0; i < msgs.length; i++) {
-							msgs[i] = getIncomingMessage(pdus[i], bundle);
-							msgFrom = msgs[i].getOriginatingAddress();
-							msgBody += msgs[i].getMessageBody();
-						}
+                        for (int i = 0; i < msgs.length; i++) {
+                            msgs[i] = getIncomingMessage(pdus[i], bundle);
+                            msgFrom = msgs[i].getOriginatingAddress();
+                            msgBody += msgs[i].getMessageBody();
+                        }
 
-						if (this.isReceiving && this.callbackReceive != null) {
-							JSONObject jsonObj = new JSONObject();
-							jsonObj.put("messageBody", msgBody);
-							jsonObj.put("originatingAddress", msgFrom);
+                        if (this.isReceiving && this.callbackReceive != null) {
+                            JSONObject jsonObj = new JSONObject();
+                            jsonObj.put("messageBody", msgBody);
+                            jsonObj.put("originatingAddress", msgFrom);
 
-							PluginResult result = new PluginResult(PluginResult.Status.OK, jsonObj);
-							result.setKeepCallback(true);
-							callbackReceive.sendPluginResult(result);
-						}
-					}
+                            PluginResult result = new PluginResult(PluginResult.Status.OK, jsonObj);
+                            result.setKeepCallback(true);
+                            callbackReceive.sendPluginResult(result);
+                        }
+                    }
 
-					// If the plugin is active and we don't want to broadcast to other receivers
-					if (this.isReceiving && !broadcast) {
-						this.abortBroadcast();
-					}
-				}
-			} catch (Exception e) {
-				System.out.println("Error: " + e);
-				PluginResult result = new PluginResult(PluginResult.Status.ERROR, e.toString());
-				result.setKeepCallback(true);
-				callbackReceive.sendPluginResult(result);
-			}
-		}
+                    // If the plugin is active and we don't want to broadcast to other receivers
+                    if (this.isReceiving && !broadcast) {
+                        this.abortBroadcast();
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e);
+                PluginResult result = new PluginResult(PluginResult.Status.ERROR, e.toString());
+                result.setKeepCallback(true);
+                callbackReceive.sendPluginResult(result);
+            }
+        }
     }
 
 	private SmsMessage getIncomingMessage(Object aObject, Bundle bundle) {
