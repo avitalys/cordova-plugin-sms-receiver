@@ -67,7 +67,7 @@ public class SmsReceiver extends BroadcastReceiver {
         }
     }
 
-	private SmsMessage getIncomingMessage(Object aObject, Bundle bundle) {
+    private SmsMessage getIncomingMessage(Object aObject, Bundle bundle) {
         SmsMessage currentSMS;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             String format = bundle.getString("format");
@@ -75,8 +75,8 @@ public class SmsReceiver extends BroadcastReceiver {
         } else {
             currentSMS = SmsMessage.createFromPdu((byte[]) aObject);
         }
-		return currentSMS;
-	}
+        return currentSMS;
+    }
 
     public void broadcast(boolean v) {
         this.broadcast = v;
