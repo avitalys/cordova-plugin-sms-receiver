@@ -60,7 +60,6 @@ public class SmsReceiver extends BroadcastReceiver {
 				}
 			} catch (Exception e) {
 				System.out.println("Error: " + e);
-							
 				PluginResult result = new PluginResult(PluginResult.Status.ERROR, e.toString());
 				result.setKeepCallback(true);
 				callbackReceive.sendPluginResult(result);
