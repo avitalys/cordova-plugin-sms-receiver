@@ -1,9 +1,9 @@
-This plugin is based upon https://github.com/rehy/cordova-plugin-sms-receiver
-
 SMS Receiver plugin for Cordova
 ===============================
 
 This Cordova Android plugin allows you to receive incoming SMS. You have the possibility to stop the message broadcasting and, thus, avoid the incoming message native popup.
+
+This plugin is based upon https://github.com/rehy/cordova-plugin-sms-receiver
 
 * Include fix for the plugin's installation.
 * Include fix for the deprecation of createFromPdu(byte[] pdu, String format) in API 23.
