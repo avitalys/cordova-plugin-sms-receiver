@@ -5,6 +5,11 @@ SMS Receiver plugin for Cordova
 
 This Cordova Android plugin allows you to receive incoming SMS. You have the possibility to stop the message broadcasting and, thus, avoid the incoming message native popup.
 
+* Include fix for the plugin's installation.
+* Include fix for the deprecation of createFromPdu(byte[] pdu, String format) in API 23.
+* Include a new function that ask permission with rationale.
+
+
 ## Install
 
 ```
@@ -29,7 +34,7 @@ SmsReceiver.checkAvailability((available) => {
 ```
 
 ### hasPermission ###
-Check if the App has the 'Manifest.permission.RECEIVE_SMS' permission
+Check if the App has the 'Manifest.permission.RECEIVE_SMS' permission.
 
 ```js
 SmsReceiver.hasPermission((result) => {
@@ -44,9 +49,9 @@ SmsReceiver.hasPermission((result) => {
 ```
 
 ### startReception ###
-Start the SMS receiver waiting for incoming message
+Start the SMS receiver waiting for incoming message.
 The success callback function will be called everytime a new message is received.
-The success return value is a JSON object {"originatingAddress":"+32472345678", "messageBody":"Hello World"}
+The success return value is a JSON object {"originatingAddress":"+32472345678", "messageBody":"Hello World"}.
 The error callback is called if an error occurs.
 
 Example:
@@ -59,7 +64,7 @@ SmsReceiver.startReception(({messageBody, originatingAddress}) => {
 ```
 
 ### stopReception ###
-Stop the SMS receiver
+Stop the SMS receiver.
 
 Example:
 ```js
@@ -85,7 +90,7 @@ SmsReceiver.requestPermission(() => {
 ```
 
 ### requestPermissionRationale ###
-Checks with the OS whether it is necessary to show a dialog explaining why the permission is needed (https://developer.android.com/training/permissions/requesting.html#explain) and then shows the system permission dialog.
+Checks with the OS whether it is necessary to show a dialog explaining why the permission is needed (as described in https://developer.android.com/training/permissions/requesting.html#explain), and then shows the system permission dialog.
 
 The success callback function will be called if user has granted the requested permission.
 The error callback is called if the permission wasn't received because of either NOT_AVAILABLE, DENIED or DENIED_WITHOUT_ASKING;
