@@ -29,24 +29,25 @@ public class SmsReceiver extends BroadcastReceiver {
                 Bundle bundle = intent.getExtras();
 
                 if (bundle != null) {
-                    //---retrieve the SMS message received---
+                    // Retrieve the SMS message received
                     Object[] smsExtra = (Object[]) bundle.get(SMS_EXTRA_NAME);
 
                     if (smsExtra != null) {
                         String msgBody = "";
-                        String msgFrom = "";
                         SmsMessage[] msgs = new SmsMessage[smsExtra.length];
 
+                        // Long SMS are splitted to multiple part - and 
+                        // this is why we need to collect the message body.
                         for (int i = 0; i < msgs.length; i++) {
                             msgs[i] = getIncomingMessage(smsExtra[i], bundle);
-                            msgFrom = msgs[i].getOriginatingAddress();
                             msgBody += msgs[i].getMessageBody();
                         }
 
+                        // Create the result JSON object
                         if (this.isReceiving && this.callbackReceive != null) {
                             JSONObject jsonObj = new JSONObject();
                             jsonObj.put("messageBody", msgBody);
-                            jsonObj.put("originatingAddress", msgFrom);
+                            jsonObj.put("originatingAddress", msgs[0].getOriginatingAddress());
                             jsonObj.put("getTimestampMillis", msgs[0].getTimestampMillis());
                             jsonObj.put("isStatusReportMessage", msgs[0].isStatusReportMessage());
 
