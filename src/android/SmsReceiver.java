@@ -26,11 +26,11 @@ public class SmsReceiver extends BroadcastReceiver {
         if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
             try {
                 // Get the SMS map from Intent
-                Bundle bundle = intent.getExtras();
+                Bundle intentExtras = intent.getExtras();
 
-                if (bundle != null) {
+                if (intentExtras != null) {
                     // Retrieve the SMS message received
-                    Object[] smsExtra = (Object[]) bundle.get(SMS_EXTRA_NAME);
+                    Object[] smsExtra = (Object[]) intentExtras.get(SMS_EXTRA_NAME);
 
                     if (smsExtra != null) {
                         String msgBody = "";
@@ -39,7 +39,7 @@ public class SmsReceiver extends BroadcastReceiver {
                         // Long SMS are splitted to multiple part - and 
                         // this is why we need to collect the message body.
                         for (int i = 0; i < msgs.length; i++) {
-                            msgs[i] = getIncomingMessage(smsExtra[i], bundle);
+                            msgs[i] = getIncomingMessage(smsExtra[i], intentExtras);
                             msgBody += msgs[i].getMessageBody();
                         }
 
@@ -71,10 +71,11 @@ public class SmsReceiver extends BroadcastReceiver {
         }
     }
 
-    private SmsMessage getIncomingMessage(Object aObject, Bundle bundle) {
+    private SmsMessage getIncomingMessage(Object aObject, Bundle intentExtras) {
         SmsMessage currentSMS;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            String format = bundle.getString("format");
+            // Get the format extra from the Telephony.Sms.Intents.SMS_RECEIVED_ACTION intent
+            String format = intentExtras.getString("format");
             currentSMS = SmsMessage.createFromPdu((byte[]) aObject, format);
         } else {
             currentSMS = SmsMessage.createFromPdu((byte[]) aObject);
