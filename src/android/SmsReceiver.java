@@ -12,6 +12,7 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONObject;
 
 public class SmsReceiver extends BroadcastReceiver {
+    public static final String SMS_EXTRA_NAME = "pdus";
     private CallbackContext callbackReceive;
     private boolean isReceiving = true;
 
@@ -29,15 +30,15 @@ public class SmsReceiver extends BroadcastReceiver {
 
                 if (bundle != null) {
                     //---retrieve the SMS message received---
-                    Object[] pdus = (Object[]) bundle.get("pdus");
+                    Object[] smsExtra = (Object[]) bundle.get(SMS_EXTRA_NAME);
 
-                    if (pdus != null) {
+                    if (smsExtra != null) {
                         String msgBody = "";
                         String msgFrom = "";
-                        SmsMessage[] msgs = new SmsMessage[pdus.length];
+                        SmsMessage[] msgs = new SmsMessage[smsExtra.length];
 
                         for (int i = 0; i < msgs.length; i++) {
-                            msgs[i] = getIncomingMessage(pdus[i], bundle);
+                            msgs[i] = getIncomingMessage(smsExtra[i], bundle);
                             msgFrom = msgs[i].getOriginatingAddress();
                             msgBody += msgs[i].getMessageBody();
                         }
