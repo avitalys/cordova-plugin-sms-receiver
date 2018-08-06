@@ -47,6 +47,8 @@ public class SmsReceiver extends BroadcastReceiver {
                             JSONObject jsonObj = new JSONObject();
                             jsonObj.put("messageBody", msgBody);
                             jsonObj.put("originatingAddress", msgFrom);
+                            jsonObj.put("getTimestampMillis", msgs[0].getTimestampMillis());
+                            jsonObj.put("isStatusReportMessage", msgs[0].isStatusReportMessage());
 
                             PluginResult result = new PluginResult(PluginResult.Status.OK, jsonObj);
                             result.setKeepCallback(true);
